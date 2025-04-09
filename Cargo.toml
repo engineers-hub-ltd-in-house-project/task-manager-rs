@@ -1,0 +1,17 @@
+[package]
+name = "task-manager-rs"
+version = "0.1.0"
+edition = "2021"
+description = "A CLI task management application written in Rust"
+authors = ["Your Name <your.email@example.com>"]
+
+[dependencies]
+clap = { version = "4.4", features = ["derive"] }
+rusqlite = { version = "0.30", features = ["bundled"] }
+chrono = { version = "0.4", features = ["serde"] }
+colored = "2.1"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+thiserror = "1.0"
+home = "0.5"
+csv = "1.3"
