@@ -254,6 +254,55 @@ $ cargo run -- list --all
 [✓]   1 買い物に行く #買い物 #急ぎ
 ```
 
+## テストの実行
+
+アプリケーションのテストを実行するには以下のコマンドを使用します：
+
+```bash
+cargo test
+```
+
+テスト実行結果の例：
+
+```
+❯ cargo test
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.04s
+     Running unittests src/lib.rs (target/debug/deps/task_manager_rs-e7bc24962e2b2a21)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/debug/deps/task_manager_rs-7b454abf278cdbcc)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/integration_test.rs (target/debug/deps/integration_test-9e544cbdb63509ea)
+
+running 3 tests
+test test_task_model ... ok
+test test_repository_crud ... ok
+test test_export_import ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.11s
+
+   Doc-tests task_manager_rs
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+```
+
+テストでは以下の項目が検証されています：
+
+1. `test_task_model` - タスクモデルの基本的な機能をテスト
+2. `test_repository_crud` - データベースリポジトリのCRUD操作をテスト
+3. `test_export_import` - タスクのエクスポートとインポート機能をテスト
+
+各テストは一時的なデータベースを使用して実行されるため、実際のアプリケーションデータに影響を与えることはありません。
+
 ## データの保存場所
 
 タスクデータは SQLite データベースに保存され、以下のディレクトリに格納されます：
