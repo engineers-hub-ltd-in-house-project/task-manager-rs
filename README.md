@@ -364,7 +364,7 @@ MIT
 
 ## 作者
 
-Yusuke Sato
+Yusuke Sato（Engineers Hub Co. ,Ltd.）
 
 ---
 
