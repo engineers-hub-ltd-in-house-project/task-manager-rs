@@ -1,5 +1,12 @@
 use rusqlite::{Connection, Result};
 use crate::error::TaskError;
+use std::env;
+use std::path::PathBuf;
+
+// テスト用のDBパスを環境変数から取得する関数
+fn get_test_db_path() -> Option<PathBuf> {
+    env::var("TASK_MANAGER_TEST_DB").ok().map(PathBuf::from)
+}
 
 /// データベーススキーマの初期化
 pub fn initialize_db(conn: &mut Connection) -> Result<()> {
@@ -68,6 +75,17 @@ pub fn initialize_db(conn: &mut Connection) -> Result<()> {
 
 /// データベース接続の取得
 pub fn get_connection() -> crate::error::Result<Connection> {
+    // テスト用のDBパスが環境変数で設定されている場合はそれを使用
+    if let Some(test_path) = get_test_db_path() {
+        let mut conn = Connection::open(test_path)?;
+        // 外部キー制約を有効化
+        conn.execute("PRAGMA foreign_keys = ON", [])?;
+        // データベーススキーマの初期化
+        initialize_db(&mut conn)?;
+        return Ok(conn);
+    }
+
+    // 通常の動作：ホームディレクトリを使用
     let home_dir = home::home_dir().ok_or_else(|| TaskError::Unknown("ホームディレクトリを特定できません".to_string()))?;
     let db_dir = home_dir.join(".task-manager-rs");
     std::fs::create_dir_all(&db_dir).map_err(|e| TaskError::IoError(e))?;

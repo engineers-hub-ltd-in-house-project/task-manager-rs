@@ -314,16 +314,28 @@ impl TaskRepository {
 
     /// タスクを完了状態に設定
     pub fn complete_task(&mut self, id: i64) -> Result<()> {
-        let mut task = self.get_task(id)?;
-        task.complete();
-        self.update_task(&task)
+        // タスクを取得して存在を確認
+        let task = self.get_task(id)?;
+        
+        // タスクを複製し、変更を加える
+        let mut task_clone = task.clone();
+        task_clone.complete();
+        
+        // 変更を保存
+        self.update_task(&task_clone)
     }
 
     /// タスクを未完了状態に設定
     pub fn uncomplete_task(&mut self, id: i64) -> Result<()> {
-        let mut task = self.get_task(id)?;
-        task.uncomplete();
-        self.update_task(&task)
+        // タスクを取得して存在を確認
+        let task = self.get_task(id)?;
+        
+        // タスクを複製し、変更を加える
+        let mut task_clone = task.clone();
+        task_clone.uncomplete();
+        
+        // 変更を保存
+        self.update_task(&task_clone)
     }
 
     /// タスクを削除
