@@ -350,6 +350,8 @@ src/
     ├── date.rs      # 日付処理
     ├── format.rs    # 表示フォーマット
     └── mod.rs       # モジュール定義
+tests/               # テスト
+└── integration_test.rs # 統合テスト
 ```
 
 ## ライセンス
@@ -362,7 +364,7 @@ MIT
 
 ## 作者
 
-Yusuke Sato <yusuke.sato@engineers-hub.ltd>
+Yusuke Sato
 
 ---
 
