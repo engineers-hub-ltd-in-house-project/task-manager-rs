@@ -309,6 +309,18 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 - Linux/macOS: `~/.task-manager-rs/tasks.db`
 - Windows: `C:\Users\<username>\.task-manager-rs\tasks.db`
 
+## 継続的インテグレーション
+
+このプロジェクトはGitHub Actionsを使用して継続的インテグレーション（CI）を実施しています。
+
+### ビルド・テストワークフロー
+
+`rust-ci.yml` - プッシュやプルリクエスト時に自動的に実行される基本的なCIパイプライン
+- コードのビルド
+- テストの実行（インテグレーションテストを含む）
+
+このシンプルなワークフローにより、コードの変更が既存の機能を壊していないことを継続的に確認できます。
+
 ## 使用技術
 
 - [clap](https://crates.io/crates/clap): コマンドライン引数の解析
@@ -352,6 +364,9 @@ src/
     └── mod.rs       # モジュール定義
 tests/               # テスト
 └── integration_test.rs # 統合テスト
+.github/             # GitHub関連の設定
+└── workflows/       # GitHub Actions設定
+    └── rust-ci.yml     # ビルド・テストワークフロー
 ```
 
 ## ライセンス
